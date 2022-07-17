@@ -12,11 +12,11 @@ const validationSchema = Yup.object({});
 
 const RootComponent = () => {
   // formik component
-  const { setFieldValue, values, errors, touched, resetForm, handleSubmit } =
+  const { setFieldValue, values, errors, touched, handleSubmit } =
     useFormik({
       initialValues,
       onSubmit: (values) => {
-        console.log("formik submit");
+        console.log("formik submit", stateDta);
       },
       validationSchema,
     });
@@ -35,7 +35,7 @@ const RootComponent = () => {
     let childOfState = [...tempState[index]?.tableData];
     childOfState.push(obj);
     tempState[index].tableData = childOfState;
-    console.log(tempState[index])
+    // console.log(tempState[index])
     setStateDta(tempState);
   };
   const handleDeleteTableRow = (index, tableIndex) => {
@@ -43,7 +43,7 @@ const RootComponent = () => {
     tempState?.[index]?.tableData?.splice(tableIndex, 1);
     setStateDta(tempState);
   };
-  console.log({stateDta})
+  // console.log({stateDta})
   const addField = () => {
     setStateDta([
       ...stateDta,
@@ -134,6 +134,7 @@ const RootComponent = () => {
                           <td>{tData?.userEmail}</td>
                           <td>
                             <button
+                              type="button"
                               className="btn btn-sm btn-danger"
                               onClick={() =>
                                 handleDeleteTableRow(index, tIndex)
